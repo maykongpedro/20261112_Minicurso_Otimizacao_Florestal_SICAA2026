@@ -8,7 +8,7 @@
   Minicurso · abertura (mostrada às 8 h): capa, apresentação, contexto (slides 1 a 8)
   e guia de pré-requisitos, com os testes do Solver e do Colab (slides 9 a 12).
   HTML puro, arquivo único, sem dependências externas. Mesmo motor e visual da palestra v2.
-  Teclas: → / espaço / clique = avança | ← = volta | N = notas | G = grade | F = tela cheia | Home/End
+  Teclas: → / espaço / clique = avança | ← = volta | G = grade | F = tela cheia | Home/End
   ?pdf no endereço = um slide por página, com todas as etapas abertas.
 -->
 <style>
@@ -101,11 +101,7 @@ code { font-family: var(--mono); font-size: .92em; background: #eceae2; padding:
 .arq .nm small { display: block; font-size: 15px; font-weight: 500; color: var(--ink-2); margin-top: 2px; }
 .arq .bl { font-size: 14px; color: var(--ink-3); text-align: right; }
 
-/* notas e grade */
-#notas { position: fixed; left: 0; right: 0; bottom: 0; max-height: 34vh; overflow: auto; background: rgba(15,21,18,.94); color: #e9efe9; font: 17px/1.5 var(--fonte); padding: 16px 28px 20px; display: none; z-index: 20; }
-#notas.aberto { display: block; }
-#notas b { color: #9fd4b0; }
-.notas { display: none; }
+/* grade */
 #grade { position: fixed; inset: 0; background: rgba(15,21,18,.96); z-index: 30; display: none; overflow: auto; padding: 30px; color: #e9efe9; font-family: var(--fonte); }
 #grade.aberto { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-content: start; }
 #grade button { all: unset; cursor: pointer; padding: 12px 14px; border-radius: 8px; background: #1d2a23; font-size: 15px; line-height: 1.3; }
@@ -117,7 +113,7 @@ code { font-family: var(--mono); font-size: .92em; background: #eceae2; padding:
 body.pdf, html:has(body.pdf) { height: auto; overflow: visible; background: #f7f5ef; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 body.pdf * { transition: none !important; }
 body.pdf #palco { position: static !important; transform: none !important; width: 1280px; height: auto; overflow: visible; }
-body.pdf #progresso, body.pdf #numero, body.pdf #bloco-atual, body.pdf #notas, body.pdf #grade { display: none !important; }
+body.pdf #progresso, body.pdf #numero, body.pdf #bloco-atual, body.pdf #grade { display: none !important; }
 body.pdf .slide { position: relative; inset: auto; width: 1280px; height: 720px; opacity: 1; visibility: visible; overflow: hidden; break-after: page; }
 .pdf-num { position: absolute; right: 26px; bottom: 16px; font-size: 13px; color: var(--ink-3); }
 .pdf-bloco { position: absolute; left: 72px; top: 22px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--verde-medio); font-weight: 700; }
@@ -167,7 +163,6 @@ svg [data-s] { transform: none; }
       <div class="autor">Maykon Gabriel Gonçalves Pedro</div>
     </div>
     <svg class="floresta" id="svg-floresta" viewBox="0 0 1280 250" preserveAspectRatio="none"></svg>
-    <div class="notas">8h00. Dar bom-dia e pedir que cada um já ligue o computador e abra o navegador e o Excel enquanto eu me apresento. Avisar o combinado: uns 8 minutos de conversa e depois vamos testar tudo juntos.</div>
   </section>
 
   <!-- ======================= 2. QUEM SOU EU ======================= -->
@@ -210,7 +205,6 @@ svg [data-s] { transform: none; }
         <div class="tl-car" style="margin-top:7px; font-size:17.5px; line-height:1.38"><b>Responsável técnico</b> pela modelagem estatística do inventário florestal e pela modelagem de <b>Pesquisa Operacional</b> no planejamento estratégico.</div>
       </div>
     </div>
-    <div class="notas">1 min. Sou de Curitiba, no Paraná, e é um prazer estar aqui em Minas Gerais. <b>Clique 2:</b> me formei em Engenharia Florestal na UFPR, em Curitiba; contar aqui o que fiz na universidade. Depois vieram os MBAs em dados e em Pesquisa Operacional. <b>Cliques 3 a 5:</b> comecei como estagiário, como muitos de vocês vão começar: primeiro em suprimentos na Tree Wood (recebimento de madeira e logística de exportação), depois em planejamento na Klabin (análises, automação em VBA e mapas em QGIS), onde virei engenheiro de planejamento. <b>Clique 6:</b> hoje estou na LD Celulose, como responsável técnico pela modelagem estatística do inventário e por tudo que envolve Pesquisa Operacional no Woodstock. <b>Para fechar:</b> o que me motiva é pegar um problema real e simplificar em um modelo. E estou aqui também porque a melhor forma de aprender é ensinando: se não consigo explicar, é porque ainda não entendi.</div>
   </section>
 
   <!-- ======================= 3. QOQ ======================= -->
@@ -223,7 +217,6 @@ svg [data-s] { transform: none; }
     </div>
     <div class="chamada" data-s="4" style="margin-top:34px">Responder <b>QOQ</b> é escolher as <b>variáveis de decisão</b> do modelo. É por aí que começa cada exercício de hoje.</div>
     <div class="fonte"><b>Fonte:</b> Arce e Dobner (2024)</div>
-    <div class="notas">1 min. QOQ é o jeito do prof. Arce de resumir o planejamento. Perguntar: alguém já fez estágio ou trabalho em que teve de decidir onde cortar ou para onde mandar a madeira? Cada pergunta vira um índice da variável.</div>
   </section>
 
   <!-- ======================= 4. O QUE É OTIMIZAR ======================= -->
@@ -236,7 +229,6 @@ svg [data-s] { transform: none; }
     </div>
     <div class="chamada" data-s="4" style="margin-top:30px">Otimizar é encontrar, entre todas as soluções <b>possíveis</b> (que respeitam as restrições), a <b>melhor</b> segundo o objetivo.</div>
     <div class="fonte"><b>Fontes:</b> Arce e Dobner (2024); Floriano (2019)</div>
-    <div class="notas">2 min. Mostrar aqui o livro físico de Arce e Dobner (2024); o primeiro exercício (família Silva) sai dele. Tudo o que vamos fazer hoje usa só esses três elementos: em cada exercício, a primeira tarefa é achar os três no enunciado.</div>
   </section>
 
   <!-- ======================= 5. O QUE É PL ======================= -->
@@ -250,7 +242,6 @@ svg [data-s] { transform: none; }
     </div>
     <div class="chamada" data-s="5" style="margin-top:28px">Hectare, metro cúbico e real <b>dá para dividir</b>. Por isso, nos dois primeiros exercícios, a PL basta.</div>
     <div class="fonte"><b>Fonte:</b> Floriano (2019)</div>
-    <div class="notas">1,5 min. Não precisa decorar as quatro hipóteses. Destacar a DIVISIBILIDADE (cartão laranja): ela volta daqui a dois slides.</div>
   </section>
 
   <!-- ======================= 6. QUEM RESOLVE ======================= -->
@@ -267,7 +258,6 @@ svg [data-s] { transform: none; }
     </div>
     <div class="chamada" data-s="5" style="margin-top:28px">No <b>Excel Solver</b>, as duas coisas estão juntas: a planilha é onde escrevemos o modelo, e o suplemento Solver é quem resolve.</div>
     <div class="fonte"><b>Fontes:</b> elaboração própria; Postek et al. (2024)</div>
-    <div class="notas">1 min. A ferramenta muda; o raciocínio do modelo é o mesmo. No Colab, o Pyomo faz o papel da planilha (modelagem) e o HiGHS faz o papel do Solver.</div>
   </section>
 
   <!-- ======================= 7. QUANDO NÃO DÁ PARA DIVIDIR ======================= -->
@@ -280,7 +270,6 @@ svg [data-s] { transform: none; }
     </div>
     <div class="chamada" data-s="4" style="margin-top:30px">Bloco 3: 30 blocos × 2 fábricas = <b>60 variáveis</b>: cabe no Solver do Excel, que aceita até 200.<br>Bloco 4: 120 blocos × 2 fábricas = <b>240 variáveis</b>: aí entra o Colab.</div>
     <div class="fonte"><b>Fontes:</b> Arce (2025); Floriano (2019)</div>
-    <div class="notas">1,5 min. Com variáveis inteiras, o solver precisa "testar ramos" (branch and bound) e o problema fica mais pesado. O limite de 200 variáveis do Solver do Excel é o motivo de o bloco 4 ir para o Colab.</div>
   </section>
 
   <!-- ======================= 8. PLANO DO DIA ======================= -->
@@ -295,7 +284,6 @@ svg [data-s] { transform: none; }
       <div class="ag" data-s="4"><div class="n">5</div><div class="q">Quanta floresta a fábrica precisa?<small>A conta da base florestal, passo a passo</small></div><div class="tp">Conta macro</div></div>
       <div class="ag" data-s="4"><div class="n">6</div><div class="q">O que ficou de fora<small>O que o modelo não enxerga e o que importa para o negócio</small></div><div class="tp">Conversa</div></div>
     </div>
-    <div class="notas">1 min. Visão geral, sem horários. <b>Clique 1:</b> começamos pequeno, com problemas de 2 variáveis. <b>Clique 3:</b> depois do intervalo, decisões de sim ou não, primeiro no Excel e depois no Colab. <b>Clique 4:</b> fechamos com a conta da base florestal e discutindo os limites. No fim, convidar para a palestra da tarde. Agora: deixar o computador pronto.</div>
   </section>
 
   <!-- ======================= 9. ANTES DE COMEÇAR ======================= -->
@@ -321,7 +309,6 @@ svg [data-s] { transform: none; }
       </div>
     </div>
     <div class="chamada" data-s="3" style="margin-top:28px">Para hoje você só precisa de <b>duas coisas funcionando</b>: o Solver no Excel e o Colab no navegador.</div>
-    <div class="notas">2 min. Começa a parte prática: deixar o computador pronto. Tranquilizar quem nunca programou. <b>Clique 1:</b> é a sequência que vamos repetir em todo exercício; o passo 2 (modelar) é o mais importante. <b>Clique 2:</b> as duas ferramentas. <b>Clique 3:</b> então vamos testar as duas agora.</div>
   </section>
 
   <!-- ======================= 10. EXCEL / SOLVER ======================= -->
@@ -367,7 +354,6 @@ svg [data-s] { transform: none; }
         </div>
       </div>
     </div>
-    <div class="notas">3 min. Passar pelas mesas. <b>Clique 2:</b> mostrar onde fica o botão. <b>Clique 3:</b> é o caso mais comum, porque o Solver vem desativado por padrão. <b>Clique 4:</b> se o computador do laboratório bloquear a instalação, a pessoa faz dupla com o colega até a TI resolver.</div>
   </section>
 
   <!-- ======================= 11. ARQUIVOS DO DIA ======================= -->
@@ -404,7 +390,6 @@ svg [data-s] { transform: none; }
         </div>
       </div>
     </div>
-    <div class="notas">3 min. Antes deste slide, compartilhar a pasta do Drive com o e-mail de cada aluno (pedir os e-mails no início, se a lista da comissão não tiver). <b>Clique 1:</b> os arquivos. <b>Clique 2:</b> conferir se todo mundo recebeu o convite; quem não recebeu confere o e-mail com você. <b>Cliques 3 e 4:</b> planilhas são baixadas; notebooks abrem direto no Colab. Combinar com a turma que o gabarito só aparece depois de cada exercício.</div>
   </section>
 
   <!-- ======================= 12. COLAB ======================= -->
@@ -451,14 +436,12 @@ resolve_e_confere(modelo)</pre></div>
         </div>
       </div>
     </div>
-    <div class="notas">4 min. <b>Cliques 1 a 4:</b> o teste simples. <b>Cliques 5 e 6:</b> o notebook de teste instala o Pyomo e o HiGHS (cerca de 30 s) e resolve um modelo de 2 variáveis. Quem vir a mensagem verde está pronto. Se aparecer erro de instalação, normalmente é internet: rodar de novo.</div>
   </section>
 
   <div id="progresso"></div>
   <div id="numero"></div>
 </div>
 
-<div id="notas"></div>
 <div id="grade"></div>
 
 <script>
@@ -500,8 +483,6 @@ function aplica() {
   document.getElementById("progresso").style.width = (100 * (atual + 1) / slides.length) + "%";
   document.getElementById("numero").textContent = `${atual + 1} / ${slides.length}`;
   document.getElementById("bloco-atual").textContent = s.dataset.bloco || "";
-  const n = s.querySelector(".notas");
-  document.getElementById("notas").innerHTML = `<b>Slide ${atual + 1}</b> · etapa ${passo}/${s._max} — ${n ? n.innerHTML : "(sem notas)"}`;
   history.replaceState(null, "", `#${atual + 1}.${passo}`);
 }
 function avanca() { if (passo < slides[atual]._max) passo++; else if (atual < slides.length - 1) { atual++; passo = 0; } aplica(); }
@@ -529,7 +510,6 @@ addEventListener("keydown", e => {
   else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); volta(); }
   else if (e.key === "Home") vaiPara(0);
   else if (e.key === "End") vaiPara(slides.length - 1);
-  else if (e.key.toLowerCase() === "n") document.getElementById("notas").classList.toggle("aberto");
   else if (e.key.toLowerCase() === "g") { grade.classList.toggle("aberto"); [...grade.children].forEach((b, i) => b.classList.toggle("atual", i === atual)); }
   else if (e.key.toLowerCase() === "f") { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
   else if (e.key === "Escape") grade.classList.remove("aberto");
